@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users'
+    'users',
+    'mincheol',
 ]
 
 MIDDLEWARE = [
@@ -76,12 +77,12 @@ WSGI_APPLICATION = 'chatu.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mysql',
-        'USER' : 'root',
-        'PASSWORD' : 'a123456789',
-        'HOST' : 'db',
-        'PROT' : '3302',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mincheol',
+        'USER' : 'mincheol',
+        'PASSWORD' : 'roqkf348',
+        'HOST' : '127.0.01',
+        'PROT' : '5432',
     }
 }
 
