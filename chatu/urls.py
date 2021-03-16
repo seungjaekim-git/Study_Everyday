@@ -13,9 +13,39 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.urls import path,include
 from django.contrib import admin
-from django.urls import path
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+from rest_framework import permissions
+from rest_framework import routers
+from boards import views as view
+
+router = routers.DefaultRouter()
+router.register(r'boards', view.BoardViewset)
+router.register(r'comments', view.CommentViewset)
+
+schema_view = get_schema_view(
+   openapi.Info(
+      title="chat u api",
+      default_version='v1',
+      description="Test description",
+      terms_of_service="https://www.google.com/policies/terms/",
+      contact=openapi.Contact(email="kimsj950902@gmail.com"),
+   ),
+   public=True,
+   permission_classes=[permissions.AllowAny],
+)
+
+
+api_urls = [
+    path('users/', include('users.urls')),
+    path('boards/', include('boards.urls')),
+    path('docs', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc')
+]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include(api_urls)),
+    path('',include(router.urls)),    
 ]
